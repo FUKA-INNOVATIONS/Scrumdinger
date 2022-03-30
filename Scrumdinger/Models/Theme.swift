@@ -35,8 +35,13 @@ enum Theme: String {
         case .indigo, .magenta, .navy, .oxblood, .purple: return .white
         }
     }
+
     var mainColor: Color { // This property initializes a color from the asset catalog.
         Color(rawValue) // creates a color using the enumeration’s rawValue.
+    }
+    
+    var name: String {
+        rawValue.capitalized
     }
 }
 

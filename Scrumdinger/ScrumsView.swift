@@ -15,19 +15,30 @@ struct ScrumsView: View {
      Tip
      You can also initialize lists from collections of data, specify a different selection type, and more. To learn about the List view, read the*/
     
-    
     var body: some View {
         List {
             ForEach(scrums) { scrum in
-                CardView(scrum: scrum)
-                    .listRowBackground(scrum.theme.mainColor)
+                NavigationLink(destination: DetailView(scrum: scrum)) {
+                    CardView(scrum: scrum)
+                }
+                .listRowBackground(scrum.theme.mainColor)
             }
         }
+        .navigationTitle("Daily Scrums")
+        .toolbar {
+            Button(action: {}) {
+                Image(systemName: "plus")
+            }
+            .accessibilityLabel("New Scrum")
+        }
     }
+    
 }
 
 struct ScrumsView_Previews: PreviewProvider {
     static var previews: some View {
-        ScrumsView(scrums: DailyScrum.sampleData) // pass an array of scrums to the ScrumsView initializer
+        NavigationView {
+            ScrumsView(scrums: DailyScrum.sampleData) // pass an array of scrums to the ScrumsView initializer
+        }
     }
 }
